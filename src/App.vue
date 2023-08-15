@@ -19,7 +19,7 @@
   </template>
   
   <script setup>
-  import { ref, onMounted, nextTick } from 'vue';
+  import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
   import Chart from 'Chart.js/dist/Chart.js';
   
   const items = ref([
@@ -34,8 +34,11 @@
   let carousel = null;
  
   onMounted(() => {
-    carousel = new Flickity('#carousel', {});
+    carousel = new Flickity('#carousel', { imagesLoaded: true, });
   });
+  onBeforeUnmount(() => {
+  Carousel.destroy()
+})
   
   // ============== PIE
   
